@@ -40,11 +40,14 @@ app.use(`/${staticCertPath}`, express.static(uploadDir));
 
 // Database Connection Pool
 const dbConfig = {
-       uri: process.env.DATABASE_URL, // Reads the single connection string from PlanetScale
-    ssl: {
-        rejectUnauthorized: true
-    },
-    connectionLimit: 10
+      host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    connectionLimit: 10,
+    waitForConnections: true,
+    queueLimit: 0
 };
 const pool = mysql.createPool(dbConfig).promise();
 
