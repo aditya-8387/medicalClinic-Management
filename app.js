@@ -89,6 +89,11 @@ const authenticateToken = (req, res, next) => {
 };
 
 // --- ROUTES ---
+// --- Root Route Redirect ---
+// Redirects visitors from the main URL to the login page
+app.get('/', (req, res) => {
+    res.redirect('/medical_login.html');
+});
 
 app.post('/login', async (req, res) => {
     const { roll_no, password, role } = req.body;
