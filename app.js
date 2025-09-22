@@ -40,14 +40,11 @@ app.use(`/${staticCertPath}`, express.static(uploadDir));
 
 // Database Connection Pool
 const dbConfig = {
-      host: process.env.MYSQLHOST || process.env.DB_HOST || 'localhost',
-    user: process.env.MYSQLUSER || process.env.DB_USER || 'root',
-    password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD || '',
-    database: process.env.MYSQLDATABASE || process.env.DB_NAME || 'medical_records',
-    port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
-    connectionLimit: 10,
-    waitForConnections: true,
-    queueLimit: 0
+       uri: process.env.DATABASE_URL, // Reads the single connection string from PlanetScale
+    ssl: {
+        rejectUnauthorized: true
+    },
+    connectionLimit: 10
 };
 const pool = mysql.createPool(dbConfig).promise();
 
