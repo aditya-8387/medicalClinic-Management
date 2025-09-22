@@ -40,11 +40,12 @@ app.use(`/${staticCertPath}`, express.static(uploadDir));
 
 // Database Connection Pool
 const dbConfig = {
-      host: process.env.DB_HOST,
+       host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
+    port: process.env.DB_PORT || 3306,
+    // The 'ssl' object has been removed
     connectionLimit: 10,
     waitForConnections: true,
     queueLimit: 0
